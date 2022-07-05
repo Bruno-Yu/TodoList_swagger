@@ -8,8 +8,81 @@
   <title>TodoList_swagger</title>
 </head>
 <body>
-  
-  
+  <div class="loginView d-none">
+    <div class="container">
+      <div class="row ">
+        <div class="col-6 d-flex justify-content-end g-0">
+          <div class="side mt-3 pt-3">
+            <a href="./index.html" class="d-block text-center mb-3"><img src="./pics/logo_lg.svg" alt="logo"></a>
+            <img class="d-block" src="./pics/signInPic.png" alt="singInPic">
+          </div>
+        </div>
+        <div class="col-6 d-flex flex-direction-column align-items-center justify-content-center">
+          <div class="form">
+            <h4 class=" fw-bold mb-4 text-dark">最實用的線上代辦事項服務</h4>
+            <form>
+              <div class="mb-5">
+                <label for="email" class="form-label fw-bold small text-dark">Email</label>
+                <input type="email" class="form-control" id="email" aria-describedby="email" placeholder="請輸入Email">
+              </div>
+              <div class="mb-4">
+                <label for="Password" class="form-label text-dark fw-bold small">密碼</label>
+                <input type="password" class="form-control" id="Password" placeholder="請輸入密碼">
+              </div>
+              <div class="text-center">
+                <button type="submit" class="btn btn-dark mb-4">登入</button>
+                <br>
+                <a href="#" class="fw-bold link-dark lh-lg text-decoration-none" >註冊帳號</a>
+              </div>
+            
+            </form>
+          </div>
+        </div>
+      </div> 
+    </div>
+  </div>
+  <div class="signUpView d-none">
+    <div class="container">
+      <div class="row ">
+        <div class="col-6 d-flex justify-content-end g-0">
+          <div class="side mt-3 pt-3">
+            <a href="./index.html" class="d-block text-center mb-3"><img src="./pics/logo_lg.svg" alt="logo"></a>
+            <img class="d-block" src="./pics/signInPic.png" alt="singInPic">
+          </div>
+        </div>
+        <div class="col-6 d-flex flex-direction-column align-items-center justify-content-center">
+          <div class="form">
+            <h4 class=" fw-bold mb-4 text-dark">註冊帳號</h4>
+            <form>
+              <div class="mb-1">
+                <label for="signUpEmail" class="form-label fw-bold small text-dark">Email</label>
+                <input type="email" class="form-control" id="signUpEmail" aria-describedby="signUpEmail" placeholder="請輸入Email">
+              </div>
+              <div class="mb-1">
+                <label for="signUpName" class="form-label text-dark fw-bold small ">您的暱稱</label>
+                <input type="password" class="form-control" id="signUpName" placeholder="請輸入您的暱稱">
+              </div>
+              <div class="mb-1">
+                <label for="signUpPassword" class="form-label text-dark fw-bold small">密碼</label>
+                <input type="password" class="form-control" id="signUpPassword" placeholder="請輸入密碼">
+              </div>
+              <div class="mb-5">
+                <label for="signUpConfirmPassword" class="form-label text-dark fw-bold small">再次輸入密碼</label>
+                <input type="password" class="form-control" id="signUpConfirmPassword" placeholder="請再次輸入密碼">
+              </div>
+              <div class="text-center">
+                <button type="submit" class="btn btn-dark mb-4">註冊帳號</button>
+                <br>
+                <a href="#" class="fw-bold link-dark lh-lg text-decoration-none" >登入</a>
+              </div>
+            
+            </form>
+          </div>
+        </div>
+      </div> 
+    </div>
+  </div>
+  <div class="todoListView"> </div>
   <script src="./js/all.js"></script>
 </body>
 </html>
