@@ -82,6 +82,7 @@ loginLink.addEventListener('click', (e) => {
 const loginEmail = document.querySelector("#email");
 const loginPassword = document.querySelector("#Password");
 const loginBtn = document.querySelector(".loginBtn");
+const signUpLink= document.querySelector(".signUpLink");
 // console.log(loginEmail, loginPassword, loginBtn);
 
 loginBtn.addEventListener('click', e => { 
@@ -117,4 +118,12 @@ loginBtn.addEventListener('click', e => {
       })
     return;
   })
+})
+
+signUpLink.addEventListener('click', e => { 
+  e.preventDefault();
+   pages.forEach((item) => {
+    item.style.display = "none";
+  });
+  signUpView.style.display = "block";
 })
