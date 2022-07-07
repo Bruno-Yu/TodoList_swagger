@@ -100,27 +100,31 @@
           <input type="text" class="form-control border-0" placeholder="新增代辦事項" aria-label="addToDos" aria-describedby="addBtn">
           <button type="button" id="addBtn" style="border-radius: 0 10px 10px 0; border: none; background:white; "><img src="./pics/plus.svg" alt="plus"></button>
         </div>
-      <div class="todoList bg-light shadow">
+      <div class="todoList bg-light shadow ">
         <div class="todoList-tab row border-bottom-1 border-secondary"> 
           <div class="col"><a href="#">全部</a></div>
           <div class="col"><a href="#">待完成</a></div>
           <div class="col"><a href="#">已完成</a></div>
         </div>
         <div class="todoList-items">
-          <ul class="list-unstyled">
-            <li class="border-bottom-1 border-secondary d-flex pb-3">
-              <label class=" text-dark form-check-label d-block" for="flexCheckDefault"></label>
-                <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
+          <ul>
+            <li class="form-check">
+              <label class="form-check-label" for="item1" >
+                <input class="form-check-input" type="checkbox" value="" id="item1">
               Default checkbox
             </label>
-            <button type="button" class="ms-auto d-block border-0 bg-light"><img src="./pics/close.svg" alt="close"></button>
+            <button type="button" ><img src="./pics/close.svg" alt="close"></button>
           </li>
         </ul>
-        <ul class="list-unstyled d-flex justify-content-between ">
-          <li class="border-0">5個待完成項目</li>
-          <li class="border-0"><button type="button" class="border-0 text-secondary bg-light">清除已完成項目</button></li>
+        <ul class=" finished">
+          <li >5個待完成項目</li>
+          <li ><button type="button" >清除已完成項目</button></li>
         </ul>
         </div>
+      </div>
+      <div class="noItems d-none">
+        <p>目前尚無待辦事項</p>
+        <img src="./pics/empty.svg" alt="empty">
       </div>
       </div>
     </div>
