@@ -8,7 +8,7 @@
   <title>TodoList_swagger</title>
 </head>
 <body>
-  <div class="loginView d-none">
+  <div class="loginView " >
     <div class="container">
       <div class="row ">
         <div class="d-none d-md-flex col-md-6 justify-content-end g-0">
@@ -31,7 +31,7 @@
                 <input type="password" class="form-control" id="Password" placeholder="請輸入密碼">
               </div>
               <div class="text-center">
-                <button type="submit" class="btn btn-dark mb-4">登入</button>
+                <button type="button" class="btn btn-dark mb-4 loginBtn">登入</button>
                 <br>
                 <a href="#" class="fw-bold link-dark lh-lg text-decoration-none" >註冊帳號</a>
               </div>
@@ -42,7 +42,7 @@
       </div> 
     </div>
   </div>
-  <div class="signUpView d-none">
+  <div class="signUpView" style="display:none" >
     <div class="container"> 
       <div class="row ">
         <div class="col-6 d-none d-md-flex justify-content-end g-0">
@@ -62,7 +62,7 @@
               </div>
               <div class="mb-1">
                 <label for="signUpName" class="form-label text-dark fw-bold small ">您的暱稱</label>
-                <input type="password" class="form-control" id="signUpName" placeholder="請輸入您的暱稱">
+                <input type="text" class="form-control" id="signUpName" placeholder="請輸入您的暱稱">
               </div>
               <div class="mb-1">
                 <label for="signUpPassword" class="form-label text-dark fw-bold small">密碼</label>
@@ -73,9 +73,9 @@
                 <input type="password" class="form-control" id="signUpConfirmPassword" placeholder="請再次輸入密碼">
               </div>
               <div class="text-center">
-                <button type="submit" class="btn btn-dark mb-4">註冊帳號</button>
+                <button type="button" class="btn btn-dark mb-4" id="signUpBtn">註冊帳號</button>
                 <br>
-                <a href="#" class="fw-bold link-dark lh-lg text-decoration-none" >登入</a>
+                <a href="#" class="fw-bold link-dark lh-lg text-decoration-none loginLink" >登入</a>
               </div>
             
             </form>
@@ -84,7 +84,7 @@
       </div> 
     </div>
   </div>
-  <div class="todoListView bg-primary  ">
+  <div class="todoListView bg-primary " style="display:none">
     <div class="container">
       <nav class="navbar  ">
           <a class="navbar-brand" href="#"><img src="./pics/logo_lg.svg" alt="logo"></a>
@@ -128,6 +128,8 @@
       </div>
       </div>
     </div>
-  <script src="./js/all.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.27.2/axios.min.js"></script>
+<script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+  <script src="./index.js"></script>
 </body>
 </html>
