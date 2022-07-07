@@ -122,7 +122,7 @@ loginBtn.addEventListener('click', e => {
 
 signUpLink.addEventListener('click', e => { 
   e.preventDefault();
-   pages.forEach((item) => {
+  pages.forEach((item) => {
     item.style.display = "none";
   });
   signUpView.style.display = "block";
