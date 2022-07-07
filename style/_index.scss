@@ -90,9 +90,10 @@ body{
         label{
           display: block;
           color: var(--bs-dark);
-          cursor: pointer;
-          .checked{
+          input:checked ~ span {
+            cursor: pointer;
             text-decoration: line-through;
+            // transition: all 0.4s ease-in-out;
           }
           
         }

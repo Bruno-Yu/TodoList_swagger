@@ -12049,10 +12049,10 @@ body {
 .todoListView .todoList-items li label {
   display: block;
   color: var(--bs-dark);
-  cursor: pointer;
 }
 
-.todoListView .todoList-items li label .checked {
+.todoListView .todoList-items li label input:checked ~ span {
+  cursor: pointer;
   text-decoration: line-through;
 }
 
