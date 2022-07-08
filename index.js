@@ -296,7 +296,7 @@ todoTab.addEventListener("click", (e) => {
   if (e.target.nodeName == "A") {
     const elems = document.querySelectorAll(".todoList-tab a");
     elems.forEach((item) => item.removeAttribute("active"));
-    e.target.classList.add("active");
+    e.target.setAttribute("active",'');
     todoTabState = e.target.dataset.state;
     init();
   }
