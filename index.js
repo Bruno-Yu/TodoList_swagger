@@ -1,5 +1,4 @@
-
-
+let todoTabState = "all";
 
 // api
 const apiUrl = 'https://todoo.5xcamp.us';
@@ -26,6 +25,12 @@ const signUpPassword = document.querySelector("#signUpPassword");
 const signUpConfirmPassword= document.querySelector("#signUpConfirmPassword");
 const signUpBtn = document.querySelector("#signUpBtn");
 const loginLink = document.querySelector('.loginLink');
+
+
+// 篩選按鈕
+
+
+
 
 // console.log(signUpEmail, signUpName, signUpPassword, signUpConfirmPassword)
 // 註冊
@@ -146,8 +151,6 @@ signUpLink.addEventListener('click', e => {
 
 
 
-// 加入待辦
-
 const inputSearch = document.querySelector(".inputSearch");
 const addBtn = document.querySelector("#addBtn");
 
@@ -156,15 +159,24 @@ const addBtn = document.querySelector("#addBtn");
 function init(){
   axios.get(`${apiUrl}/todos`)
     .then((res) => {
+        let todos;
+    if (todoTabState == "all") {
+      todos = res.data.todos;
+    } else if (todoTabState == "undo") {
+      todos = res.data.todos.filter((item) => !item.completed_at);
+    } else if (todoTabState == "done") {
+      todos = res.data.todos.filter((item) => item.completed_at);
+    }
       let str = "";
-      res.data.todos.forEach((item) => { 
+      todos.forEach((item) => { 
+        let check = item.completed_at ===null ? "" : "checked"; 
         str += `
           <li class="form-check" data-id = "${item.id}">
-              <label class="form-check-label" for="item1" checked="${item.completed_at ? true:false}">
-                <input class="form-check-input" type="checkbox" id="item1">
+              <label class="form-check-label" for="${item.id}" >
+                <input class="form-check-input" type="checkbox" id="${item.id}" ${check}>
               <span>${item.content}</span>  
             </label>
-            <button type="button deleteBtn"  ><img src="./pics/close.svg" alt="close"></button>
+            <button type="button" data-btn="delete"  ><img src="./pics/close.svg" alt="close"></button>
           </li>
         `;
       })
@@ -186,10 +198,106 @@ function countNum() {
   }
   let num = 0;
   items.forEach(item => { 
-    if (!item.getAttribute("checked")!=null) { 
+    if (item.getAttribute("checked")===null) { 
       num += 1;
     }
   })
   todoItems.innerHTML = ` ${num}`;
   return;
 }
+
+// 加入待辦
+
+addBtn.addEventListener('click', e => { 
+  if (inputSearch.value == "") {
+      Swal.fire({
+      icon: 'error',
+      title: 'oh...',
+      text: '你啥都沒填是沒事待辦?',
+      })
+    return;
+  }
+  axios.post(`${apiUrl}/todos`, {
+    "todo": {
+      "content": inputSearch.value,
+    }
+  }).then(() => { 
+    console.log('新增成功');
+    inputSearch.value = "";
+    init();
+  
+  }).catch(() => { 
+      Swal.fire({
+      icon: 'error',
+      title: '錯誤有錯誤',
+      text: '是401錯誤，沒被授權喔!',
+      })
+  })
+})
+
+// 編輯與刪除邏輯
+
+todoListItems.addEventListener('click', e => {
+  const id = e.target.closest('li').dataset.id;
+  if (e.target.dataset.btn == "delete") { 
+    axios.delete(`${apiUrl}/todos/${id}`)
+      .then(() => {
+        init();
+        return;
+      });
+  };
+  // 完成
+  if (e.target.nodeName == "INPUT") { 
+    axios.patch(`${apiUrl}/todos/${id}/toggle`)
+      .then((res) => {
+      init();
+      Swal.fire({
+        icon: "success",
+        title: "成功！"
+      });
+    });
+  }
+  // console.log(e.target);
+  // 編輯
+  if (e.target.nodeName == "LI") { 
+      Swal.fire({
+      icon: "info",
+      input: "text",
+      inputLabel: '請編輯內容',
+      inputValue: '',
+      showCancelButton: true,
+      inputValidator: (value) => {
+          if (!value) {
+            return '不能是空的喔!'
+          }
+        }
+      }).then((content) => { 
+        console.log(content.value);
+        axios.put(`${apiUrl}/todos/${id}`, {
+          "todo": {
+            content: content.value,
+          }
+        }).then((res) => { 
+          init();
+          Swal.fire({
+            icon: "success",
+            title: "編輯成功！"
+          });
+        })
+      })
+  }
+})
+
+
+//切換tab
+const todoTab = document.querySelector(".todoList-tab");
+todoTab.addEventListener("click", (e) => {
+  e.preventDefault();
+  if (e.target.nodeName == "A") {
+    const elems = document.querySelectorAll(".todoList-tab a");
+    elems.forEach((item) => item.removeAttribute("active"));
+    e.target.classList.add("active");
+    todoTabState = e.target.dataset.state;
+    init();
+  }
+}); 
