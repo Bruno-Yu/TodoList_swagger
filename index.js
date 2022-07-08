@@ -1,5 +1,6 @@
 
 
+
 // api
 const apiUrl = 'https://todoo.5xcamp.us';
 
@@ -10,6 +11,13 @@ const todoListView = document.querySelector(".todoListView");
 
 const pages = [signUpView, loginView, todoListView];
 
+// list 
+const todoListItems = document.querySelector('.todoList-items ul')
+
+const todoList = document.querySelector(".todoList");
+const noItems = document.querySelector('.noItems');
+
+const todoItems = document.querySelector('.finished span');
 // 註冊
 
 const signUpEmail = document.querySelector("#signUpEmail");
@@ -82,7 +90,8 @@ loginLink.addEventListener('click', (e) => {
 const loginEmail = document.querySelector("#email");
 const loginPassword = document.querySelector("#Password");
 const loginBtn = document.querySelector(".loginBtn");
-const signUpLink= document.querySelector(".signUpLink");
+const signUpLink = document.querySelector(".signUpLink");
+const loginName = document.querySelector(".loginName");
 // console.log(loginEmail, loginPassword, loginBtn);
 
 loginBtn.addEventListener('click', e => { 
@@ -100,15 +109,19 @@ loginBtn.addEventListener('click', e => {
     "password": loginPassword.value,
     }
   }).then((res) => {
+    // 存驗證權杖進headers
+    axios.defaults.headers.common["Authorization"] = res.headers.authorization;
     Swal.fire({
       icon: 'success',
       title: '公喜母也喜',
       text: res.message,
     });
+    init();
     pages.forEach((item) => {
     item.style.display = "none";
-  });
-  todoListView.style.display = "block";
+    });
+    loginName.innerHTML = `${res.data.nickname}`;
+    todoListView.style.display = "block";
 
   }).catch((err) => { 
       Swal.fire({
@@ -127,3 +140,56 @@ signUpLink.addEventListener('click', e => {
   });
   signUpView.style.display = "block";
 })
+
+
+// todoList
+
+
+
+// 加入待辦
+
+const inputSearch = document.querySelector(".inputSearch");
+const addBtn = document.querySelector("#addBtn");
+
+
+
+function init(){
+  axios.get(`${apiUrl}/todos`)
+    .then((res) => {
+      let str = "";
+      res.data.todos.forEach((item) => { 
+        str += `
+          <li class="form-check" data-id = "${item.id}">
+              <label class="form-check-label" for="item1" checked="${item.completed_at ? true:false}">
+                <input class="form-check-input" type="checkbox" id="item1">
+              <span>${item.content}</span>  
+            </label>
+            <button type="button deleteBtn"  ><img src="./pics/close.svg" alt="close"></button>
+          </li>
+        `;
+      })
+      todoListItems.innerHTML = str;
+      countNum();
+    })
+};
+
+function countNum() { 
+  const items = document.querySelectorAll('.todoList-items input');
+  console.log(items.length);
+  if (!items.length) {
+    todoList.style.display = "none";
+    noItems.style.display = "block";
+    return;
+  } else {
+    todoList.style.display = "block";
+    noItems.style.display = "none";
+  }
+  let num = 0;
+  items.forEach(item => { 
+    if (!item.getAttribute("checked")!=null) { 
+      num += 1;
+    }
+  })
+  todoItems.innerHTML = ` ${num}`;
+  return;
+}

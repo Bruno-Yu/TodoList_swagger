@@ -90,14 +90,14 @@
           <a class="navbar-brand" href="#"><img src="./pics/logo_lg.svg" alt="logo"></a>
             <ul class="navbar-nav ms-auto mb-2 flex-row align-items-center ">
               <li class="nav-item me-5">
-                <a class="nav-link d-none d-md-inline text-dark fw-bold" aria-current="page" href="#">王小明的代辦</a>
+                <a class="nav-link d-none d-md-inline text-dark fw-bold" aria-current="page" href="#"><span class="loginName">王小明</span>的代辦</a>
               </li>
               <li class="nav-item">
                 <a class="nav-link text-dark fw-bold" aria-current="page" href="#">登出</a>
               </li>
         </nav>
       <div class="input-group shadow mb-3 mt-md-5">
-          <input type="text" class="form-control border-0" placeholder="新增代辦事項" aria-label="addToDos" aria-describedby="addBtn">
+          <input type="text" class="form-control border-0 inputSearch" placeholder="新增代辦事項" aria-label="addToDos" aria-describedby="addBtn">
           <button type="button" id="addBtn" style="border-radius: 0 10px 10px 0; border: none; background:white; "><img src="./pics/plus.svg" alt="plus"></button>
         </div>
       <div class="todoList bg-light shadow ">
@@ -117,12 +117,12 @@
           </li>
         </ul>
         <ul class=" finished">
-          <li >5個待完成項目</li>
+          <li ><span></span>個待完成項目</li>
           <li ><button type="button" >清除已完成項目</button></li>
         </ul>
         </div>
       </div>
-      <div class="noItems d-none">
+      <div class="noItems" style="display:none">
         <p>目前尚無待辦事項</p>
         <img src="./pics/empty.svg" alt="empty">
       </div>
